@@ -93,14 +93,21 @@
     <ClCompile Include="DM2231_Controller.cpp" />
     <ClCompile Include="DM2231_Model.cpp" />
     <ClCompile Include="DM2231_View.cpp" />
+    <ClCompile Include="Entities.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="PlayerInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DM2231_Controller.h" />
     <ClInclude Include="DM2231_Model.h" />
     <ClInclude Include="DM2231_View.h" />
+    <ClInclude Include="Entities.h" />
+    <ClInclude Include="Header.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="PlayerInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
