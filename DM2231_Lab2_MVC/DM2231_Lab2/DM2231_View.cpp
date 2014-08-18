@@ -450,3 +450,11 @@ void DM2231_View::setFullScreen(bool m_bFullScreen)
 {
 	this->m_bFullScreen = m_bFullScreen;
 }
+
+bool DM2231_View::GetKeys(char s)
+{
+	if(keys['s'])
+		return true;
+	else 
+		return false;
+}
