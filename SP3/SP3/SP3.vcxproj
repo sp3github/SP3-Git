@@ -78,17 +78,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AI.h" />
+    <ClInclude Include="Building.h" />
+    <ClInclude Include="Casino.h" />
+    <ClInclude Include="Define.h" />
+    <ClInclude Include="FastZ.h" />
     <ClInclude Include="Gun.h" />
+    <ClInclude Include="NeutralZ.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Pistol.h" />
     <ClInclude Include="Shotgun.h" />
+    <ClInclude Include="SlowZ.h" />
     <ClInclude Include="Uzi.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp" />
+    <ClCompile Include="Building.cpp" />
+    <ClCompile Include="Casino.cpp" />
+    <ClCompile Include="FastZ.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NeutralZ.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="Shotgun.cpp" />
+    <ClCompile Include="SlowZ.cpp" />
     <ClCompile Include="Uzi.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
