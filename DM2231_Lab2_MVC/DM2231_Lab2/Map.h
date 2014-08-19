@@ -4,7 +4,8 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-using namespace std;
+
+#include "Header.h"
 
 class CMap
 {
@@ -16,12 +17,24 @@ public:
 		       const int theMap_Height, const int theMap_Width, 
 		       const int theTileSize);
 	bool LoadMap(const string mapName);
+
 	int getNumOfTiles_ScreenHeight(void);	// Get the number of tiles for height of the screen
 	int getNumOfTiles_ScreenWidth(void);	// Get the number of tiles for width of the screen
 	int getNumOfTiles_MapHeight(void);		// Get the number of tiles for height of the map
 	int getNumOfTiles_MapWidth(void);		// Get the number of tiles for width of the map
 
 	vector<vector<int> > theScreenMap;
+
+	void LoadLevel(int level);
+
+	void RenderTileMap();
+
+	TextureImage TileMapTexture[1];
+	int mapOffset_x, mapOffset_y;
+	int tileOffset_x, tileOffset_y;
+	int mapFineOffset_x, mapFineOffset_y;
+
+	void Update();
 
 private:
 	int theScreen_Height;

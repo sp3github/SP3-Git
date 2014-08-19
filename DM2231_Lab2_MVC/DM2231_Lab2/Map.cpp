@@ -41,6 +41,7 @@ void CMap::Init(const int theScreen_Height, const int theScreen_Width,
 
 bool CMap::LoadMap(const string mapName)
 {
+	cout<<mapName<<endl;
 	if (LoadFile(mapName) == true)
 	{
 		printf("Map (%s) has been successfully loaded!\n", mapName.c_str());
@@ -55,7 +56,7 @@ bool CMap::LoadFile(const string mapName)
 	int theLineCounter = 0;
 	int theMaxNumOfColumns = 0;
 
-	ifstream file(mapName.c_str());
+	ifstream file(mapName);
 	if(file.is_open())
 	{
 		int i = 0, k = 0;
@@ -87,15 +88,18 @@ bool CMap::LoadFile(const string mapName)
 					while(getline(iss, token, ','))
 					{
 
-						theScreenMap[theLineCounter][theColumnCounter++] = atoi(token.c_str());
+						theScreenMap[theLineCounter - 1][theColumnCounter++] = atoi(token.c_str());
 					}
 				}
 			}	
 			theLineCounter++;
 		}
 	}
+	else
+	{
+		return false;
+	}
 	return true;
-
 }
 
 // Get the number of tiles for height of the screen
@@ -120,4 +124,70 @@ int CMap::getNumOfTiles_MapHeight(void)
 int CMap::getNumOfTiles_MapWidth(void)
 {
 	return theNumOfTiles_MapWidth;
+}
+
+void CMap::LoadLevel(int level)
+{
+	switch (level)
+	{
+	case 1:
+		Init(600, 800, 600, 800, TILE_SIZE);
+		LoadMap("Levels\\MapTest.csv");
+
+		break;
+	default:
+		break;
+	}
+
+}
+
+void CMap::RenderTileMap(void)
+{
+	mapFineOffset_x = mapOffset_x % TILE_SIZE;
+
+	glPushMatrix();
+	for(int i = 0; i < getNumOfTiles_ScreenHeight(); i ++)
+	{
+		for(int k = 0; k < getNumOfTiles_ScreenWidth(); k ++)
+		{
+			// If we have reached the right side of the Map, then do not display the extra column of tiles.
+			if ( (tileOffset_x+k) >= getNumOfTiles_MapWidth() )
+				break;
+			glPushMatrix();
+			glTranslatef(k*TILE_SIZE-mapFineOffset_x, i*TILE_SIZE, 0);
+			glEnable( GL_TEXTURE_2D );
+			glEnable( GL_BLEND );
+			if(theScreenMap[i][k] == 0)
+				glColor3f(0,0,0);
+			else
+				glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+			//if (theScreenMap[i][tileOffset_x + k] == 1)
+				//glBindTexture(GL_TEXTURE_2D, TileMapTexture[theScreenMap[i][tileOffset_x + k]].texID);
+			//else if (theScreenMap[i][tileOffset_x + k] == 2)
+				//glBindTexture(GL_TEXTURE_2D, TileMapTexture[theScreenMap[i][tileOffset_x + k]].texID);
+			//else
+				//glBindTexture(GL_TEXTURE_2D, TileMapTexture[0].texID);
+
+			glBegin(GL_QUADS);
+			glTexCoord2f(0,1); glVertex2f(0,0);
+			glTexCoord2f(0,0); glVertex2f(0,TILE_SIZE);
+			glTexCoord2f(1,0); glVertex2f(TILE_SIZE,TILE_SIZE);
+			glTexCoord2f(1,1); glVertex2f(TILE_SIZE,0);
+			glEnd();
+			glDisable( GL_BLEND );
+			glDisable( GL_TEXTURE_2D );
+			glPopMatrix();
+		}
+	}
+	glPopMatrix();
+
+}
+
+void CMap::Update()
+{
+	tileOffset_x = (int) (mapOffset_x / TILE_SIZE);
+	if (tileOffset_x+getNumOfTiles_ScreenWidth() > getNumOfTiles_MapWidth())
+		tileOffset_x = getNumOfTiles_MapWidth() - getNumOfTiles_ScreenWidth();
 }

@@ -1,11 +1,10 @@
+#pragma once
 #include <stdio.h>
 
 #include "DM2231_Model.h"
 #include "DM2231_View.h"
 #include "DM2231_Controller.h"
 
-#include <gl\gl.h>			// Header File For The OpenGL32 Library
-#include <gl\glu.h>			// Header File For The GLu32 Library
 
 int main( int argc, char* args )
 {
