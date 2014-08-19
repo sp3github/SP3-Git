@@ -97,7 +97,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Ortho2D.cpp" />
     <ClCompile Include="PlayerInfo.cpp" />
+    <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DM2231_Controller.h" />
@@ -107,7 +109,9 @@
     <ClInclude Include="Header.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Ortho2D.h" />
     <ClInclude Include="PlayerInfo.h" />
+    <ClInclude Include="State.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
