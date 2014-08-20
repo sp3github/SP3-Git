@@ -36,7 +36,7 @@ void CPlayerInfo::RenderHero(void) {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		if (heroAnimationInvert == false)
 		{	
-			glBindTexture(GL_TEXTURE_2D, HeroTexture[1].texID);
+			//glBindTexture(GL_TEXTURE_2D, HeroTexture[1].texID);
 			glBegin(GL_QUADS);
  
 			glTexCoord2f(0.25 * heroAnimationCounter, 1); glVertex2f(0, 0);
@@ -47,7 +47,7 @@ void CPlayerInfo::RenderHero(void) {
 		}
 		else
 		{
-			glBindTexture(GL_TEXTURE_2D, HeroTexture[1].texID);
+			//glBindTexture(GL_TEXTURE_2D, HeroTexture[1].texID);
 			glBegin(GL_QUADS);
 			glTexCoord2f(0.25 * heroAnimationCounter + 0.24,1); glVertex2f(0,0);
 			glTexCoord2f(0.25 * heroAnimationCounter + 0.24,0); glVertex2f(0,m_iTileSize);
@@ -59,7 +59,7 @@ void CPlayerInfo::RenderHero(void) {
 		if (burn == true)
 		{
 			glColor4f(1, 1, 1, 0.7);
-			glBindTexture(GL_TEXTURE_2D, HeroTexture[2].texID);
+			//glBindTexture(GL_TEXTURE_2D, HeroTexture[2].texID);
 			glBegin(GL_QUADS);
 			glTexCoord2f(0.2 * heroAnimationCounter, 1); glVertex2f(0, 0);
 			glTexCoord2f(0.2 * heroAnimationCounter, 0); glVertex2f(0, m_iTileSize);

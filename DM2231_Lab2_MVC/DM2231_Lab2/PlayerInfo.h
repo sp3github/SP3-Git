@@ -1,6 +1,6 @@
 #pragma once
 #include "Header.h"
-#include "TextureImage.h"
+//#include "TextureImage.h"
 
 class CPlayerInfo
 {
@@ -8,7 +8,7 @@ public:
 	CPlayerInfo(void);
 	~CPlayerInfo(void);
 
-	TextureImage HeroTexture[3];
+	//TextureImage HeroTexture[3];
 
 	// Render the Hero onto the screen
 	void RenderHero(void);
