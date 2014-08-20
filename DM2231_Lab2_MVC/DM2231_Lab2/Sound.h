@@ -1,46 +1,60 @@
 #pragma once
-#include <irrKlang.h>
+#include "../irrKlang/irrKlang.h"
 
 using namespace irrklang;
-
-#pragma comment(lib, "irrKlang.lib")
 
 class Sound
 {
 public:
-	enum SoundType	{
-	MENUPAGE = 0,
-	SCOREPAGE,
+	/*
+		Sound Type
+	*/
+	enum SoundType{
+	MENU = 0,
 	SUBPAGE,
 	LEVEL,
 	PISTOL,
 	SHOTGUN,
 	UZI,
+	RELOAD,	
 	EXPLOSION,
 	HEALTH,
 	AMMO,
 	SLOWDOWN,
-	RELOAD,
+	SCORE,
+	ZOMBIE,
 	};
 
 	Sound(void);
 	~Sound(void);
 
+	/*
+		Sound engine
+	*/
 	ISoundEngine* theSoundEngine;
-	ISound Menupage;
-	ISound Scorepage;
-	ISound Subpage;
-	ISound Level;
-	ISound Pistol;
-	ISound Shotgun;
-	ISound Uzi;
-	ISound Explosion;
-	ISound Health;
-	ISound Ammo;
-	ISound Slowdown;
-	ISound Reload;
+	ISound* Menu;
+	ISound* Subpage;
+	ISound* Level;
+	ISound* Pistol;
+	ISound* Shotgun;
+	ISound* Uzi;
+	ISound* Reload;
+	ISound* Explosion;
+	ISound* Health;
+	ISound* Ammo;
+	ISound* Slowdown;
+	ISound* Score;
+	ISound* Zombie;
 
+	/*
+		Function to initialise all the sound
+	*/
 	bool InitSound(void);
 
-	void PlaySound(SoundType Sounds);
-}
+	/*
+		Function to play the sound
+	*/
+	void PlaySound (SoundType Sounds);
+
+
+};
