@@ -90,17 +90,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ammo.cpp" />
     <ClCompile Include="DM2231_Controller.cpp" />
     <ClCompile Include="DM2231_Model.cpp" />
     <ClCompile Include="DM2231_View.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Health.cpp" />
+    <ClCompile Include="Items.cpp" />
+    <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Slowdown.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ammo.h" />
     <ClInclude Include="DM2231_Controller.h" />
     <ClInclude Include="DM2231_Model.h" />
     <ClInclude Include="DM2231_View.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Health.h" />
+    <ClInclude Include="Items.h" />
+    <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Slowdown.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
