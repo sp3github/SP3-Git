@@ -99,14 +99,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mouse.cpp" />
-    <ClCompile Include="Ortho2D.cpp" />
     <ClCompile Include="PlayerInfo.cpp" />
     <ClCompile Include="Sound.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="UI.cpp" />
-=======
-    <ClCompile Include="State.cpp" />
->>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DM2231_Controller.h" />
@@ -117,14 +112,9 @@
     <ClInclude Include="loadTGA.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mouse.h" />
-    <ClInclude Include="Ortho2D.h" />
     <ClInclude Include="PlayerInfo.h" />
     <ClInclude Include="Sound.h" />
-<<<<<<< HEAD
     <ClInclude Include="UI.h" />
-=======
-    <ClInclude Include="State.h" />
->>>>>>> origin/master
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

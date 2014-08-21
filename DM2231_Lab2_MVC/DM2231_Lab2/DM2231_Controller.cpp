@@ -33,7 +33,6 @@ bool DM2231_Controller::Init(void)
 		theView->setFullScreen( false );
 	else
 		theView->setFullScreen( true );
-	theModel->TestMap.LoadLevel(1);
 
 	return true;
 }
@@ -47,7 +46,7 @@ BOOL DM2231_Controller::RunMainLoop(void)
 	BOOL done=FALSE; // Bool Variable To Exit Loop
 
 	// Create Our OpenGL Window
-	if (!theView->CreateGLWindow("OPENGL GAME",800,600,16))
+	if (!theView->CreateGLWindow("NeHe's OpenGL Framework",640,480,16))
 	{
 		return false;									// Quit If Window Was Not Created
 	}
@@ -102,11 +101,6 @@ bool DM2231_Controller::ProcessInput(void)
 			m_bContinueLoop=false;						// ESC Signalled A Quit
 			return false;
 		}
-	}
-
-	if (theView->GetKeys('w'))
-	{
-		
 	}
 
 	return true;

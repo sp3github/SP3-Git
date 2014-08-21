@@ -46,6 +46,4 @@ public:
 	bool toggleFullScreen(void);
 	// Set the fullscreen display status
 	void setFullScreen(bool m_bFullScreen);
-
-	bool GetKeys(char s);
 };
