@@ -32,36 +32,31 @@ BOOL DM2231_View::Draw(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear Screen And Depth Buffer
 	glLoadIdentity(); // Reset The Current Modelview Matrix
 
-	theModel->theOrtho2DSetUp.SetHUD(true);
+	glTranslatef(-1.5f,0.0f,-6.0f); // Move Left 1.5 Units And Into The Screen 6.0
+	glRotatef(rtri,0.0f,1.0f,0.0f); // Rotate The Triangle On The Y axis ( NEW )
+	glBegin(GL_TRIANGLES); // Start Drawing A Triangle
+		glColor3f(1.0f,0.0f,0.0f); // Set Top Point Of Triangle To Red
+		glVertex3f( 0.0f, 1.0f, 0.0f); // First Point Of The Triangle
+		glColor3f(0.0f,1.0f,0.0f); // Set Left Point Of Triangle To Green
+		glVertex3f(-1.0f,-1.0f, 0.0f); // Second Point Of The Triangle
+		glColor3f(0.0f,0.0f,1.0f); // Set Right Point Of Triangle To Blue
+		glVertex3f( 1.0f,-1.0f, 0.0f); // Third Point Of The Triangle
+	glEnd(); // Done Drawing The Triangle
 
-	theModel->TestMap.RenderTileMap();
+	glLoadIdentity(); // Reset The Current Modelview Matrix
+	glTranslatef(1.5f,0.0f,-6.0f); // Move Right 1.5 Units And Into The Screen 6.0
+	glRotatef(rquad,1.0f,0.0f,0.0f); // Rotate The Quad On The X axis ( NEW )
+	glColor3f(0.5f,0.5f,1.0f); // Set The Color To Blue One Time Only
 
-	//glTranslatef(-1.5f,0.0f,-6.0f); // Move Left 1.5 Units And Into The Screen 6.0
-	//glRotatef(rtri,0.0f,1.0f,0.0f); // Rotate The Triangle On The Y axis ( NEW )
-	//glBegin(GL_TRIANGLES); // Start Drawing A Triangle
-	//	glColor3f(1.0f,0.0f,0.0f); // Set Top Point Of Triangle To Red
-	//	glVertex3f( 0.0f, 1.0f, 0.0f); // First Point Of The Triangle
-	//	glColor3f(0.0f,1.0f,0.0f); // Set Left Point Of Triangle To Green
-	//	glVertex3f(-1.0f,-1.0f, 0.0f); // Second Point Of The Triangle
-	//	glColor3f(0.0f,0.0f,1.0f); // Set Right Point Of Triangle To Blue
-	//	glVertex3f( 1.0f,-1.0f, 0.0f); // Third Point Of The Triangle
-	//glEnd(); // Done Drawing The Triangle
+	glBegin(GL_QUADS); // Draw A Quad
+		glVertex3f(-1.0f, 1.0f, 0.0f); // Top Left
+		glVertex3f( 1.0f, 1.0f, 0.0f); // Top Right
+		glVertex3f( 1.0f,-1.0f, 0.0f); // Bottom Right
+		glVertex3f(-1.0f,-1.0f, 0.0f); // Bottom Left
+	glEnd(); // Done Drawing The Quad
 
-	//glLoadIdentity(); // Reset The Current Modelview Matrix
-	//glTranslatef(1.5f,0.0f,-6.0f); // Move Right 1.5 Units And Into The Screen 6.0
-	//glRotatef(rquad,1.0f,0.0f,0.0f); // Rotate The Quad On The X axis ( NEW )
-	//glColor3f(0.5f,0.5f,1.0f); // Set The Color To Blue One Time Only
-
-	//glBegin(GL_QUADS); // Draw A Quad
-	//	glVertex3f(-1.0f, 1.0f, 0.0f); // Top Left
-	//	glVertex3f( 1.0f, 1.0f, 0.0f); // Top Right
-	//	glVertex3f( 1.0f,-1.0f, 0.0f); // Bottom Right
-	//	glVertex3f(-1.0f,-1.0f, 0.0f); // Bottom Left
-	//glEnd(); // Done Drawing The Quad
-
-	//rtri+=0.2f; // Increase The Rotation Variable For The Triangle ( NEW )
-	//rquad-=0.15f; // Decrease The Rotation Variable For The Quad ( NEW )
-	theModel->theOrtho2DSetUp.SetHUD(false);
+	rtri+=0.2f; // Increase The Rotation Variable For The Triangle ( NEW )
+	rquad-=0.15f; // Decrease The Rotation Variable For The Quad ( NEW )
 
 	SwapBuffers(hDC); // Swap Buffers (Double Buffering)
 
@@ -394,10 +389,6 @@ LRESULT CALLBACK DM2231_View::MsgProc( HWND hWnd, // Handle For This Window
 				SetCursorPos( theMouseInfo.x, theMouseInfo.y );
 			}
 		}
-	case WM_LBUTTONDOWN:
-		{
-
-		}
 	}
 
 	// Pass All Unhandled Messages To DefWindowProc
@@ -446,7 +437,7 @@ bool DM2231_View::toggleFullScreen(void)
 
 	KillGLWindow();						// Kill Our Current Window
 	// Recreate Our OpenGL Window
-	if (!CreateGLWindow("OpenGL GAME",640,480,16))
+	if (!CreateGLWindow("NeHe's OpenGL Framework",640,480,16))
 	{
 		return false;						// Quit If Window Was Not Created
 	}
@@ -458,12 +449,4 @@ bool DM2231_View::toggleFullScreen(void)
 void DM2231_View::setFullScreen(bool m_bFullScreen)
 {
 	this->m_bFullScreen = m_bFullScreen;
-}
-
-bool DM2231_View::GetKeys(char s)
-{
-	if(keys[s] || keys[s - 32])
-		return true;
-	else 
-		return false;
 }

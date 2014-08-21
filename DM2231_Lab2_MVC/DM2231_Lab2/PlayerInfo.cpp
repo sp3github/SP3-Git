@@ -13,8 +13,12 @@ CPlayerInfo::~CPlayerInfo(void)
 void CPlayerInfo::Init(void)
 {
 	m_iTileSize = 24;
+	burn = false;
 	hero_x = 100;
 	hero_y = 300;
+	jumpspeed = 0;
+	hero_inMidAir_Up = false;
+	hero_inMidAir_Down = false;
 	heroAnimationCounter = 0;
 	heroAnimationInvert = false;
 	movementspeed = 5;
@@ -32,7 +36,7 @@ void CPlayerInfo::RenderHero(void) {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		if (heroAnimationInvert == false)
 		{	
-			glBindTexture(GL_TEXTURE_2D, HeroTexture[1].texID);
+			//glBindTexture(GL_TEXTURE_2D, HeroTexture[1].texID);
 			glBegin(GL_QUADS);
  
 			glTexCoord2f(0.25 * heroAnimationCounter, 1); glVertex2f(0, 0);
@@ -43,7 +47,7 @@ void CPlayerInfo::RenderHero(void) {
 		}
 		else
 		{
-			glBindTexture(GL_TEXTURE_2D, HeroTexture[1].texID);
+			//glBindTexture(GL_TEXTURE_2D, HeroTexture[1].texID);
 			glBegin(GL_QUADS);
 			glTexCoord2f(0.25 * heroAnimationCounter + 0.24,1); glVertex2f(0,0);
 			glTexCoord2f(0.25 * heroAnimationCounter + 0.24,0); glVertex2f(0,m_iTileSize);
@@ -52,10 +56,71 @@ void CPlayerInfo::RenderHero(void) {
 			glEnd();
 		}
 
+		if (burn == true)
+		{
+			glColor4f(1, 1, 1, 0.7);
+			//glBindTexture(GL_TEXTURE_2D, HeroTexture[2].texID);
+			glBegin(GL_QUADS);
+			glTexCoord2f(0.2 * heroAnimationCounter, 1); glVertex2f(0, 0);
+			glTexCoord2f(0.2 * heroAnimationCounter, 0); glVertex2f(0, m_iTileSize);
+			glTexCoord2f(0.2 * heroAnimationCounter + 0.19, 0) ; glVertex2f(m_iTileSize, m_iTileSize);
+			glTexCoord2f(0.2 * heroAnimationCounter + 0.19, 1); glVertex2f(m_iTileSize, 0);
+			glEnd();
+		}
+
 	glEnd();
 	glDisable( GL_BLEND );
 	glDisable( GL_TEXTURE_2D );
 	glPopMatrix();
+}
+
+// Returns true if the player is on ground
+bool CPlayerInfo::isOnGround(void)
+{
+	if (hero_inMidAir_Up == false && hero_inMidAir_Down == false)
+		return true;
+
+	return false;
+}
+
+// Returns true if the player is jumping upwards
+bool CPlayerInfo::isJumpUpwards(void)
+{
+	if (hero_inMidAir_Up == true && hero_inMidAir_Down == false)
+		return true;
+
+	return false;
+}
+
+// Returns true if the player is on freefall
+bool CPlayerInfo::isFreeFall(void)
+{
+	if (hero_inMidAir_Up == false && hero_inMidAir_Down == true)
+		return true;
+
+	return false;
+}
+
+// Set the player's status to free fall mode
+void CPlayerInfo::SetOnFreeFall(bool isOnFreeFall)
+{
+	if (isOnFreeFall == true)
+	{
+		hero_inMidAir_Up = false;
+		hero_inMidAir_Down = true;
+		jumpspeed = 0;
+	}
+}
+
+// Set the player to jumping upwards
+void CPlayerInfo::SetToJumpUpwards(bool isOnJumpUpwards)
+{
+	if (isOnJumpUpwards == true)
+	{
+		hero_inMidAir_Up = true;
+		hero_inMidAir_Down = false;
+		jumpspeed = 15;
+	}
 }
 
 // Set position x of the player
@@ -70,6 +135,19 @@ void CPlayerInfo::SetPos_y(int pos_y)
 	hero_y = pos_y;
 }
 
+// Set Jumpspeed of the player
+void CPlayerInfo::SetJumpspeed(int jumpspeed)
+{
+	this->jumpspeed = jumpspeed;
+}
+
+// Stop the player's movement
+void CPlayerInfo::SetToStop(void)
+{
+	hero_inMidAir_Up = false;
+	hero_inMidAir_Down = false;
+	jumpspeed = 0;
+}
 
 // Get position x of the player
 int CPlayerInfo::GetPos_x(void)
@@ -83,7 +161,31 @@ int CPlayerInfo::GetPos_y(void)
 	return hero_y;
 }
 
+// Get Jumpspeed of the player
+int CPlayerInfo::GetJumpspeed(void)
+{
+	return jumpspeed;
+}
 
+// Update Jump Upwards
+void CPlayerInfo::UpdateJumpUpwards()
+{
+	hero_y -= jumpspeed;
+	jumpspeed -= 1;
+	if (jumpspeed == 0)
+	{
+		burn = false;
+		hero_inMidAir_Up = false;
+		hero_inMidAir_Down = true;
+	}
+}
+
+// Update FreeFall
+void CPlayerInfo::UpdateFreeFall()
+{
+	hero_y += jumpspeed;
+	jumpspeed += 1;
+}
 
 // Set Animation Invert status of the player
 void CPlayerInfo::SetAnimationInvert(bool heroAnimationInvert)
